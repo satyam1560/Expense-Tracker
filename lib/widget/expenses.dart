@@ -1,14 +1,15 @@
+import 'package:expense/widget/chart/chart.dart';
 import 'package:expense/widget/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expense/models/expense.dart';
 import 'package:expense/widget/expenses list/expenses_list.dart';
+// import 'package:expense/widget/chart/chart.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
 
   @override
   State<Expenses> createState() {
-    // TODO: implement createState
     return _ExpensesState();
   }
 }
@@ -51,8 +52,8 @@ class _ExpensesState extends State<Expenses> {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 2),
-        content: Text('Expense deleted.'),
+        duration: const Duration(seconds: 2),
+        content: const Text('Expense deleted.'),
         action: SnackBarAction(
             label: 'Undo',
             onPressed: () {
@@ -60,6 +61,13 @@ class _ExpensesState extends State<Expenses> {
                 _registeredExpenses.insert(expenseIndex, expense);
               });
             }),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20.0, // Inner padding for SnackBar content.
+        ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
       ),
     );
   }
@@ -79,18 +87,18 @@ class _ExpensesState extends State<Expenses> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Expense Tracker'),
+        title: const Text('Expense Tracker'),
         actions: [
           IconButton(
             onPressed: _openAddExpenseOverlay,
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
           )
         ],
       ),
       body: Column(
         children: [
           //toolbar with aaded button=> Row()
-          Text('the chart'),
+          Chart(expenses: _registeredExpenses),
           Expanded(
             child: mainContent,
           ),

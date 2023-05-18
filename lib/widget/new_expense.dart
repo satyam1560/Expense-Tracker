@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:expense/models/expense.dart';
-import 'package:expense/widget/expenses.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({required this.onAddExpense, super.key});
@@ -42,15 +41,15 @@ class _NewExpenseState extends State<NewExpense> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Text('Invalid Input'),
-          content: Text(
+          title: const Text('Invalid Input'),
+          content: const Text(
               'Please make sure a valid title, amount, date and category was entered.'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(ctx);
               },
-              child: Text('Okay'),
+              child: const Text('Okay'),
             )
           ],
         ),
@@ -77,13 +76,13 @@ class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.fromLTRB(16, 48, 16, 16),
+        padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
         child: Column(
           children: [
             TextField(
               controller: _titleController,
               maxLength: 50,
-              decoration: InputDecoration(label: Text('Title')),
+              decoration: const InputDecoration(label: Text('Title')),
             ),
             Row(
               children: [
@@ -91,13 +90,13 @@ class _NewExpenseState extends State<NewExpense> {
                   child: TextField(
                     controller: _amountController,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      prefixText: ' \$',
+                    decoration: const InputDecoration(
+                      prefixText: ' ₹ ',
                       label: Text('Amount'),
                     ),
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -109,14 +108,14 @@ class _NewExpenseState extends State<NewExpense> {
                         onPressed: () {
                           _presentDatePicker();
                         },
-                        icon: Icon(Icons.calendar_month),
+                        icon: const Icon(Icons.calendar_month),
                       )
                     ],
                   ),
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Row(
@@ -141,16 +140,16 @@ class _NewExpenseState extends State<NewExpense> {
                         _selectedCategory = value;
                       });
                     }),
-                Spacer(),
+                const Spacer(),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('cancel'),
+                  child: const Text('cancel'),
                 ),
                 ElevatedButton(
                   onPressed: _submitExpenseData,
-                  child: Text('Save Expense'),
+                  child: const Text('Save Expense'),
                 )
               ],
             )
